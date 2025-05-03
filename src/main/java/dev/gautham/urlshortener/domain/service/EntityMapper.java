@@ -1,0 +1,26 @@
+package dev.gautham.urlshortener.domain.service;
+
+import dev.gautham.urlshortener.domain.entities.ShortUrl;
+import dev.gautham.urlshortener.domain.entities.User;
+import dev.gautham.urlshortener.domain.models.ShortUrlDto;
+import dev.gautham.urlshortener.domain.models.UserDto;
+import org.springframework.stereotype.Component;
+
+@Component
+public class EntityMapper {
+
+    public ShortUrlDto toShortUrlDto(ShortUrl shortUrl) {
+        UserDto userDto = null;
+        if(shortUrl.getCreatedBy() != null) {
+            userDto = toUserDto(shortUrl.getCreatedBy());
+        }
+
+        return new ShortUrlDto(shortUrl.getId(), shortUrl.getShortKey(), shortUrl.getOriginalUrl(),
+                shortUrl.isPrivate(), shortUrl.getExpiresAt(), userDto, shortUrl.getClickCount(),
+                shortUrl.getCreatedAt());
+    }
+
+    public UserDto toUserDto(User user) {
+        return new UserDto(user.getId(), user.getName());
+    }
+}
