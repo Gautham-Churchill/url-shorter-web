@@ -16,7 +16,7 @@ public class EntityMapper {
         }
 
         return new ShortUrlDto(shortUrl.getId(), shortUrl.getShortKey(), shortUrl.getOriginalUrl(),
-                shortUrl.isPrivate(), shortUrl.getExpiresAt(), userDto, shortUrl.getClickCount(),
+                shortUrl.getIsPrivate(), shortUrl.getExpiresAt(), userDto, shortUrl.getClickCount(),
                 shortUrl.getCreatedAt());
     }
 

@@ -12,8 +12,9 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "short_urls")
@@ -25,24 +26,25 @@ public class ShortUrl {
     @SequenceGenerator(name = "short_urls_id_generator", sequenceName = "short_urls_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "short_key", unique = true, nullable = false)
+    @Column(name = "short_key", nullable = false, length = 10)
     private String shortKey;
 
-    @Column(name = "original_url", nullable = false)
+    @Column(name = "original_url", nullable = false, length = Integer.MAX_VALUE)
     private String originalUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
     private User createdBy;
 
+    @ColumnDefault("false")
     @Column(name="is_private", nullable = false)
-    private boolean isPrivate = false;
+    private Boolean isPrivate = false;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private Instant createdAt;
 
     @Column(name = "expires_at")
-    private LocalDateTime expiresAt;
+    private Instant expiresAt;
 
     @Column(name = "click_count", nullable = false)
     private Long clickCount;

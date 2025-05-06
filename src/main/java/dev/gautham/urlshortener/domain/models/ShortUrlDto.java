@@ -1,8 +1,8 @@
 package dev.gautham.urlshortener.domain.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-public record ShortUrlDto(Long id, String shortKey, String originalUrl, Boolean isPrivate, LocalDateTime expiresAt,
-                          UserDto createdBy, Long clickCount, LocalDateTime createdAt) implements Serializable {
+public record ShortUrlDto(Long id, String shortKey, String originalUrl, Boolean isPrivate, Instant expiresAt,
+                          UserDto createdBy, Long clickCount, Instant createdAt) implements Serializable {
 }
